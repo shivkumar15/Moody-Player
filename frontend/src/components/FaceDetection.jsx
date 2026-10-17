@@ -219,8 +219,13 @@ function FaceDetection({ setSongs }) {
 
       setMood(`${bestMood} · ${(score * 100).toFixed(1)}%`);
 
+     const API_BASE_URL = import.meta.env.VITE_API_URL;
+
       const response = await axios.get(
-        `http://localhost:3000/songs?mood=${bestMood}`
+        `${API_BASE_URL}/songs`,
+        {
+          params: { mood: bestMood },
+        }
       );
 
       setSongs(Array.isArray(response.data.song) ? response.data.song : []);
